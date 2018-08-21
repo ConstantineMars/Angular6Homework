@@ -30,4 +30,7 @@ export class ProductComponent implements OnInit {
 
   ngOnInit() {
   }
+  onBuy() {
+    console.log('\"' + this.name + '\" was bought');
+  }
 }

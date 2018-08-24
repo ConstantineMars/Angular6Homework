@@ -1,0 +1,12 @@
+<div *ngIf="purchases.length > 0; else emptyCart">
+  Cart contains: <br/>
+
+  <li *ngFor="let product of purchases">
+    {{product.name}} {{product.price}}
+  </li>
+
+</div>
+
+<ng-template #emptyCart>
+  Your cart is empty. Please purchase something to proceed.
+</ng-template>

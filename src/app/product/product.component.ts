@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {CartService} from '../services/cart.service';
+import {Product} from '../models/product';
 
 enum Category {
   Electronics,
@@ -15,9 +17,11 @@ type Authors = Array<{id: number, text: string}>;
 })
 export class ProductComponent implements OnInit {
 
-  name = 'The Angular 6 Book';
+  private product = new Product('X1', 'The Angular 6 Book', 20);
+
+  name = this.product.name
+  price = this.product.price;
   description = 'The best seller of year 2018';
-  price = 50;
   category = Category.Books;
   isAvailable = true;
   authors: Authors = [
@@ -26,11 +30,15 @@ export class ProductComponent implements OnInit {
     {id: 3, text: 'Anthony Alicea'}
   ];
 
-  constructor() { }
+  private service: CartService;
+  constructor(service: CartService) {
+    this.service = service;
+  }
 
   ngOnInit() {
   }
   onBuy() {
     console.log('\"' + this.name + '\" was bought');
+    this.service.addPurchase(this.product);
   }
 }
